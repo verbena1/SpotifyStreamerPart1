@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:padding="@dimen/padding"
+        android:contentDescription="@string/track_image_descripton"
+        android:id="@+id/track_item_imageview"
+        android:layout_gravity="center_vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/track_item_textview"
+            android:text="@string/track_name"
+            android:padding="@dimen/padding"
+            android:textSize="@dimen/text_size_large"
+            android:lines="1" />
+
+        <TextView
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/track_album_item_textview"
+            android:text="@string/album_name"
+            android:padding="@dimen/padding"
+            android:textSize="@dimen/text_size_small"
+            android:lines="1" />
+    </LinearLayout>
+
+</LinearLayout>
