@@ -3,10 +3,8 @@ package com.sickofyou.spotifystreamerpart1;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
 public class TrackInfo implements Parcelable {
+
     public static final Creator<TrackInfo> CREATOR = new Creator<TrackInfo>() {
         @Override
         public TrackInfo createFromParcel(Parcel in) {

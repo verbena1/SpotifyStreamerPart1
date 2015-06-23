@@ -6,9 +6,6 @@ import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
 public class TopTenActivity extends AppCompatActivity {
 
     private String artistName;

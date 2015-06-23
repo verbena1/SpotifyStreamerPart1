@@ -8,19 +8,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
-public class SpotifyArtistAdapter extends ArrayAdapter {
+public class SpotifyArtistAdapter extends ArrayAdapter<SpotifyArtist> {
 
     private ArrayList<SpotifyArtist> mSpotifyArtists = new ArrayList<>();
 
     public SpotifyArtistAdapter(Context context, ArrayList<SpotifyArtist> artists) {
         super(context, 0, artists);
+    }
+
+    private static class ViewHolder {
+        TextView artistNameView;
+        ImageView artistImageView;
     }
 
     @Override
@@ -32,14 +34,15 @@ public class SpotifyArtistAdapter extends ArrayAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.search_list_item, parent, false);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.spotify_item_textview);
-            viewHolder.image = (ImageView) convertView.findViewById(R.id.spotify_item_imageview);
+            viewHolder.artistNameView = (TextView) convertView.findViewById(R.id.spotify_item_textview);
+            viewHolder.artistImageView = (ImageView) convertView.findViewById(R.id.spotify_item_imageview);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.name.setText(spotifyArtist.getName());
-        Picasso.with(getContext()).load(spotifyArtist.getImageUrl()).resize(150, 150).placeholder(R.mipmap.ic_launcher).into(viewHolder.image);
+        viewHolder.artistNameView.setText(spotifyArtist.getName());
+        Glide.with(getContext()).load(spotifyArtist.getImageUrl()).override(150, 150).placeholder(R.mipmap.ic_launcher).into(viewHolder.artistImageView);
+        //Picasso.with(getContext()).load(spotifyArtist.getImageUrl()).resize(150, 150).placeholder(R.mipmap.ic_launcher).into(viewHolder.artistImageView);
         return convertView;
     }
 
@@ -55,10 +58,5 @@ public class SpotifyArtistAdapter extends ArrayAdapter {
     public void clear() {
         super.clear();
         mSpotifyArtists.clear();
-    }
-
-    private static class ViewHolder {
-        TextView name;
-        ImageView image;
     }
 }

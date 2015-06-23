@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,6 @@ import kaaes.spotify.webapi.android.models.Track;
 import kaaes.spotify.webapi.android.models.Tracks;
 import retrofit.RetrofitError;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
 public class TopTenActivityFragment extends Fragment {
 
     private static final String TAG = TopTenActivityFragment.class.getSimpleName();
@@ -73,6 +71,8 @@ public class TopTenActivityFragment extends Fragment {
                         "Image URL: "+imageUrl+
                         "Track URL: "+trackUrl+
                         "Artist Name: "+artistName);
+
+                Toast.makeText(getActivity(), getString(R.string.not_implemented), Toast.LENGTH_SHORT).show();
             }
         });
         return rootView;
@@ -129,7 +129,7 @@ public class TopTenActivityFragment extends Fragment {
             for (Track track : tracks.tracks) {
                 try {
                     String url;
-                    // Check Artist image width and get appropriate image.
+                    // Check Artist image width and get appropriate image from JSON.
                     int width = track.album.images.get(0).width;
                     if (width > 300) {
                         url = track.album.images.get(1).url;

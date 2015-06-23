@@ -8,19 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
 public class ArtistTopTenAdapter extends ArrayAdapter<TrackInfo> {
 
     private ArrayList<TrackInfo> mTrackInfo = new ArrayList<>();
 
     public ArtistTopTenAdapter(Context context, ArrayList<TrackInfo> topTenArrayList) {
         super(context, 0, topTenArrayList);
+    }
+
+    private class ViewHolder {
+        TextView trackNameView;
+        TextView albumNameView;
+        ImageView trackImageView;
     }
 
     @Override
@@ -40,7 +43,7 @@ public class ArtistTopTenAdapter extends ArrayAdapter<TrackInfo> {
         }
         viewHolder.trackNameView.setText(trackInfo.getTrackName());
         viewHolder.albumNameView.setText(trackInfo.getAlbumName());
-        Picasso.with(getContext()).load(trackInfo.getImageUrl()).resize(150, 150).placeholder(R.mipmap.ic_launcher).into(viewHolder.trackImageView);
+        Glide.with(getContext()).load(trackInfo.getImageUrl()).placeholder(R.mipmap.ic_launcher).into(viewHolder.trackImageView);
         return convertView;
     }
 
@@ -56,11 +59,5 @@ public class ArtistTopTenAdapter extends ArrayAdapter<TrackInfo> {
     public void clear() {
         super.clear();
         mTrackInfo.clear();
-    }
-
-    private class ViewHolder {
-        TextView trackNameView;
-        TextView albumNameView;
-        ImageView trackImageView;
     }
 }
