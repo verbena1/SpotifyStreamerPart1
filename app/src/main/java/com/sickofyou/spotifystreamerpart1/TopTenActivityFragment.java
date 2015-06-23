@@ -31,6 +31,7 @@ public class TopTenActivityFragment extends Fragment {
     private ArrayList<TrackInfo> mTrackInfoList;
     private ArtistTopTenAdapter mArtistTopTenAdapter;
     private ListView mListView;
+
     public TopTenActivityFragment() {
     }
 
@@ -67,11 +68,14 @@ public class TopTenActivityFragment extends Fragment {
                 String imageUrl = trackInfo.getImageUrl();
                 String trackUrl = trackInfo.getTrackUrl();
                 String artistName = trackInfo.getArtistName();
-                Log.d(TAG, "TrackName: "+trackName+
-                        "Image URL: "+imageUrl+
-                        "Track URL: "+trackUrl+
+
+                Log.d(TAG, "\n"+
+                        "TrackName: "+trackName+"\n"+
+                        "Image URL: "+imageUrl+"\n"+
+                        "Track URL: "+trackUrl+"\n"+
                         "Artist Name: "+artistName);
 
+                // TODO: Implement Player activity/fragment
                 Toast.makeText(getActivity(), getString(R.string.not_implemented), Toast.LENGTH_SHORT).show();
             }
         });
@@ -123,7 +127,7 @@ public class TopTenActivityFragment extends Fragment {
             super.onPostExecute(tracks);
             mArtistTopTenAdapter.clear();
             if (tracks == null) {
-                Log.e(TAG, "tracks is null");
+                Log.d(TAG, "no tracks available");
                 return;
             }
             for (Track track : tracks.tracks) {

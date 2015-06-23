@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class SpotifyArtistAdapter extends ArrayAdapter<SpotifyArtist> {
 
-    private ArrayList<SpotifyArtist> mSpotifyArtists = new ArrayList<>();
+    private ArrayList<SpotifyArtist> mSpotifyArtists = new ArrayList<SpotifyArtist>();
 
     public SpotifyArtistAdapter(Context context, ArrayList<SpotifyArtist> artists) {
         super(context, 0, artists);
@@ -34,6 +34,7 @@ public class SpotifyArtistAdapter extends ArrayAdapter<SpotifyArtist> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.search_list_item, parent, false);
+
             viewHolder.artistNameView = (TextView) convertView.findViewById(R.id.spotify_item_textview);
             viewHolder.artistImageView = (ImageView) convertView.findViewById(R.id.spotify_item_imageview);
             convertView.setTag(viewHolder);
@@ -41,8 +42,9 @@ public class SpotifyArtistAdapter extends ArrayAdapter<SpotifyArtist> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.artistNameView.setText(spotifyArtist.getName());
+
         Glide.with(getContext()).load(spotifyArtist.getImageUrl()).override(150, 150).placeholder(R.mipmap.ic_launcher).into(viewHolder.artistImageView);
-        //Picasso.with(getContext()).load(spotifyArtist.getImageUrl()).resize(150, 150).placeholder(R.mipmap.ic_launcher).into(viewHolder.artistImageView);
+
         return convertView;
     }
 
