@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class TrackInfo implements Parcelable {
 
     public static final Creator<TrackInfo> CREATOR = new Creator<TrackInfo>() {
+
         @Override
         public TrackInfo createFromParcel(Parcel in) {
             return new TrackInfo(in);
@@ -43,9 +44,7 @@ public class TrackInfo implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
+    public int describeContents() {return 0;}
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -59,17 +58,13 @@ public class TrackInfo implements Parcelable {
     public String getTrackName() {
         return trackName;
     }
-
     public String getAlbumName() {
         return albumName;
     }
-
     public String getImageUrl() {
         return imageUrl;
     }
-
     public String getTrackUrl() { return trackUrl; }
-
     public String getArtistName() {
         return artistName;
     }

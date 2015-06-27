@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class SpotifyArtist implements Parcelable {
+
     public static final Creator<SpotifyArtist> CREATOR = new Creator<SpotifyArtist>() {
+
         @Override
         public SpotifyArtist createFromParcel(Parcel in) {
             return new SpotifyArtist(in);
@@ -15,6 +17,7 @@ public class SpotifyArtist implements Parcelable {
             return new SpotifyArtist[size];
         }
     };
+
     private String name;
     private String imageUrl;
     private String id;
@@ -32,9 +35,7 @@ public class SpotifyArtist implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
+    public int describeContents() {return 0;}
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

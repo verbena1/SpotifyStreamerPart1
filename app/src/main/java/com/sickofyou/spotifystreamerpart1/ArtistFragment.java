@@ -36,7 +36,6 @@ public class ArtistFragment extends Fragment {
     private SpotifyArtistAdapter mArtistAdapter;
     private ListView mListView;
     private String mSearchQueryText;
-    private List<Artist> mArtists;
 
     public ArtistFragment() {
     }
@@ -54,6 +53,7 @@ public class ArtistFragment extends Fragment {
 
         mListView = (ListView) rootView.findViewById(R.id.search_list_view);
 
+        // Check rotation? or should I put in overridden OnCreate?
         if (savedInstanceState != null) {
             mSpotifyArtists = savedInstanceState.getParcelableArrayList(getString(R.string.saved_artist_list));
         } else {
