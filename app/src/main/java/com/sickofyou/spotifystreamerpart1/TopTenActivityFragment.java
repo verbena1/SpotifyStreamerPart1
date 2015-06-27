@@ -96,11 +96,14 @@ public class TopTenActivityFragment extends Fragment {
         mListView.setAdapter(mArtistTopTenAdapter);
     }
 
+    // Used solution from
+    // http://stackoverflow.com/questions/16692536/good-solution-to-retain-listview-items-when-user-rotate-phone-and-keep-all-data
     @Override
     public void onSaveInstanceState(Bundle savedState) {
-        savedState.putParcelableArrayList(getString(R.string.saved_track_list), mTrackInfoList);
-        Log.d(TAG, "saved " + !(mTrackInfoList.isEmpty()));
         super.onSaveInstanceState(savedState);
+        if (savedState != null) {
+            savedState.putParcelableArrayList(getString(R.string.saved_track_list), mTrackInfoList);
+        }
     }
 
     private void searchTopTen(String name) {
