@@ -3,9 +3,6 @@ package com.sickofyou.spotifystreamerpart1;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
 public class SpotifyArtist implements Parcelable {
     public static final Creator<SpotifyArtist> CREATOR = new Creator<SpotifyArtist>() {
         @Override

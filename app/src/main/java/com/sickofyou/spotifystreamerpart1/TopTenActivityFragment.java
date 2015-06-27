@@ -58,7 +58,12 @@ public class TopTenActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_top_ten, container, false);
 
         mListView = (ListView) rootView.findViewById(R.id.top_ten_listview);
-        mTrackInfoList = new ArrayList<>();
+
+        if (savedInstanceState != null) {
+            mTrackInfoList = savedInstanceState.getParcelableArrayList(getString(R.string.saved_track_list));
+        } else {
+            mTrackInfoList = new ArrayList<>();
+        }
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,10 +96,10 @@ public class TopTenActivityFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(getString(R.string.saved_track_list), mTrackInfoList);
+    public void onSaveInstanceState(Bundle savedState) {
+        savedState.putParcelableArrayList(getString(R.string.saved_track_list), mTrackInfoList);
         Log.d(TAG, "saved " + !(mTrackInfoList.isEmpty()));
-        super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(savedState);
     }
 
     private void searchTopTen(String name) {

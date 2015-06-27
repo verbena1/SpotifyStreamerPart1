@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class SpotifyArtistAdapter extends ArrayAdapter<SpotifyArtist> {
 
-    private ArrayList<SpotifyArtist> mSpotifyArtists = new ArrayList<SpotifyArtist>();
+    private ArrayList<SpotifyArtist> mSpotifyArtists = new ArrayList<>();
 
     public SpotifyArtistAdapter(Context context, ArrayList<SpotifyArtist> artists) {
         super(context, 0, artists);

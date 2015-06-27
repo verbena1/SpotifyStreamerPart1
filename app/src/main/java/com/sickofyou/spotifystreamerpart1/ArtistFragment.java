@@ -29,9 +29,6 @@ import kaaes.spotify.webapi.android.models.ArtistsPager;
 import kaaes.spotify.webapi.android.models.Pager;
 import retrofit.RetrofitError;
 
-/**
- * Created by dtorres on 06/22/2015.
- */
 public class ArtistFragment extends Fragment {
 
     private final String TAG = ArtistFragment.class.getSimpleName();
@@ -56,7 +53,13 @@ public class ArtistFragment extends Fragment {
         final EditText searchText = (EditText) rootView.findViewById(R.id.search_edittext);
 
         mListView = (ListView) rootView.findViewById(R.id.search_list_view);
-        mSpotifyArtists = new ArrayList<>();
+
+        if (savedInstanceState != null) {
+            mSpotifyArtists = savedInstanceState.getParcelableArrayList(getString(R.string.saved_artist_list));
+        } else {
+            mSpotifyArtists = new ArrayList<>();
+        }
+
         bindView();
 
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -77,7 +80,7 @@ public class ArtistFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SpotifyArtist artist = (SpotifyArtist) mArtistAdapter.getItem(position);
+                SpotifyArtist artist = mArtistAdapter.getItem(position);
                 String artistId = artist.getId();
                 Intent intent = new Intent(getActivity(), TopTenActivity.class)
                         .putExtra(Intent.EXTRA_TEXT, artistId)
@@ -91,15 +94,15 @@ public class ArtistFragment extends Fragment {
 
     private void bindView() {
         mArtistAdapter = new SpotifyArtistAdapter(getActivity(), mSpotifyArtists);
-
         mListView.setAdapter(mArtistAdapter);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mSpotifyArtists != null) {
-            outState.putParcelableArrayList(getString(R.string.saved_artist_list), mSpotifyArtists);
+    public void onSaveInstanceState(Bundle savedState) {
+        super.onSaveInstanceState(savedState);
+        if (savedState != null) {
+            savedState.putParcelableArrayList(getString(R.string.saved_artist_list), mSpotifyArtists);
+            Log.d(TAG, "saved " + !(mSpotifyArtists.isEmpty()));
         }
     }
 
@@ -129,19 +132,21 @@ public class ArtistFragment extends Fragment {
                 artists = pager.items;
             } catch (RetrofitError e) {
                 SpotifyError error = SpotifyError.fromRetrofitError(e);
+                error.getErrorDetails();
                 Log.e(TAG, error.getMessage());
                 return null;
             }
-
 
             return artists;
         }
 
         @Override
         protected void onPostExecute(List<Artist> artists) {
+
             super.onPostExecute(artists);
             String url;
             mArtistAdapter.clear();
+
             for (Artist a : artists) {
                 try {
                     int width = a.images.get(0).width;
@@ -151,11 +156,11 @@ public class ArtistFragment extends Fragment {
                         url = a.images.get(0).url;
                     }
                 } catch (Exception e) {
-                    //NOP
                     url = null;
                 }
                 mSpotifyArtists.add(new SpotifyArtist(a.name, url, a.id));
             }
+
             if (mSpotifyArtists.isEmpty()) {
                 Toast.makeText(getActivity(), getString(R.string.no_artist_found), Toast.LENGTH_SHORT).show();
             }

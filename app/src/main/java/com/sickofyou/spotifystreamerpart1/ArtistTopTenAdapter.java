@@ -28,8 +28,10 @@ public class ArtistTopTenAdapter extends ArrayAdapter<TrackInfo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         TrackInfo trackInfo = mTrackInfo.get(position);
         ViewHolder viewHolder;
+
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
